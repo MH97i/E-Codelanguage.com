@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Code AI Supporter</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #343a40;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .chat-container {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 25px;
+            width: 450px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-log {
+            height: 350px;
+            overflow-y: auto;
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 15px;
+            padding-right: 15px;
+            padding-bottom: 10px;
+        }
+
+            .chat-log p {
+                margin: 8px 0;
+                padding: 8px 12px;
+                border-radius: 18px;
+                line-height: 1.5;
+                word-wrap: break-word;
+            }
+
+        .user-msg {
+            color: #0056b3;
+            font-weight: 500;
+            background-color: #e6f7ff;
+            align-self: flex-end;
+            text-align: right;
+        }
+
+        .ai-msg {
+            color: #155724;
+            font-weight: 500;
+            background-color: #f0f9f4;
+            align-self: flex-start;
+            text-align: left;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+            input[type="text"]:focus {
+                outline: none;
+                border-color: #007BFF;
+                box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+            }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.2s ease-in-out;
+            align-self: flex-end;
+            margin-top: 5px;
+        }
+
+            button:hover {
+                background-color: #0056b3;
+            }
+
+            button:focus {
+                outline: none;
+                box-shadow: 0 0 0 0.2rem rgba(0,123,255,.5);
+            }
+    </style>
+</head>
+<body>
+
+    <div class="chat-container">
+        <h1>E-Code AI Supporter</h1>
+        <div class="chat-log" id="chat-log">
+            <p class="ai-msg">Hello! I'm your E-Code AI Supporter. Ask me anything about E-Code, and I'll assist you.</p>
+        </div>
+        <input type="text" id="user-input" placeholder="Type your question here..." aria-label="User input for chat" />
+        <button onclick="getAIResponse()" aria-label="Send message to AI">Send</button>
+    </div>
+
+    <script>
+        document.getElementById('user-input').addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                getAIResponse();
+            }
+        });
+
+        function getAIResponse() {
+            const userInput = document.getElementById('user-input').value.trim();
+            const chatLog = document.getElementById('chat-log');
+
+            if (!userInput) return;
+
+            chatLog.innerHTML += `<p class="user-msg">You: ${userInput}</p>`;
+
+            const normalizedInput = userInput.toLowerCase();
+
+            // «·—œÊœ «·–ﬂÌ… »‰«¡ ⁄·Ï «·”ƒ«· „⁄  ‰ÊÌ⁄ «·—œÊœ
+            if (normalizedInput.includes("hello") || normalizedInput.includes("hi") || normalizedInput.includes("hey")) {
+                const greetings = [
+                    "Hello! How can I assist you with E-Code today?",
+                    "Hi there! What E-Code question can I answer for you?",
+                    "Greetings! Ready to help with E-Code. Ask away!",
+                    "Hello! Welcome back! What can I help you with regarding E-Code?",
+                    "Hey! E-Code support is here. What's your question?"
+                ];
+                const randomIndex = Math.floor(Math.random() * greetings.length);
+                chatLog.innerHTML += `<p class="ai-msg">${greetings[randomIndex]}</p>`;
+            } else if (normalizedInput.includes("thank you") || normalizedInput.includes("thanks")) {
+                const thanksResponses = [
+                    "You're welcome! Let me know if you need any further assistance with E-Code.",
+                    "You're very welcome!  Happy to help with E-Code.",
+                    "No problem at all!  Feel free to ask more E-Code questions anytime.",
+                    "My pleasure!  E-Code support is always here for you.",
+                    "You're most welcome!  Let me know if anything else about E-Code comes up."
+                ];
+                const randomIndex = Math.floor(Math.random() * thanksResponses.length);
+                chatLog.innerHTML += `<p class="ai-msg">${thanksResponses[randomIndex]}</p>`;
+            } else if (normalizedInput.includes("how are you") || normalizedInput.includes("how is it going") || normalizedInput.includes("how do you do")) {
+                const howAreYouResponses = [
+                    "I'm just a program, but I'm always ready to help you with E-Code! How can I assist you?",
+                    "Being an AI, I don't have feelings, but I'm functioning perfectly and ready for your E-Code questions!",
+                    "I'm doing great and ready to assist you with E-Code! What's on your mind?",
+                    "I'm in top form, ready to answer your E-Code inquiries. How can I help?",
+                    "As an AI, I'm consistently operational and ready to help with E-Code. What can I do for you today?"
+                ];
+                const randomIndex = Math.floor(Math.random() * howAreYouResponses.length);
+                chatLog.innerHTML += `<p class="ai-msg">${howAreYouResponses[randomIndex]}</p>`;
+            } else if (normalizedInput.includes("what is e-code") || normalizedInput.includes("what does e-code do")) {
+                const whatIsECodeResponses = [
+                    "E-Code is a programming language designed to make game development easier. Itís simple, intuitive, and optimized for rapid prototyping.",
+                    "E-Code is a beginner-friendly programming language focused on game creation, emphasizing ease of use and quick results.",
+                    "E-Code is a specialized language built for game development, designed for simplicity and speed in creating games.",
+                    "Think of E-Code as your express lane to game development. It's designed to be easy to learn and use for making games quickly.",
+                    "E-Code is a programming language crafted for game development, aiming for simplicity and efficiency in the game creation process."
+                ];
+                const randomIndex = Math.floor(Math.random() * whatIsECodeResponses.length);
+                chatLog.innerHTML += `<p class="ai-msg">${whatIsECodeResponses[randomIndex]}</p>`;
+            } else if (normalizedInput.includes("how to start") || normalizedInput.includes("beginner guide") || normalizedInput.includes("how do I begin")) {
+                const howToStartResponses = [
+                    "To get started with E-Code, check out the official documentation for tutorials, examples, and a simple step-by-step guide to building your first project.",
+                    "The best place to begin with E-Code is our official documentation. You'll find tutorials, examples, and a beginner-friendly guide there.",
+                    "Ready to dive into E-Code? Start with the official documentation for step-by-step guides, tutorials, and sample projects.",
+                    "For a smooth start with E-Code, I recommend the official documentation. Itís packed with tutorials and beginner guides.",
+                    "Begin your E-Code journey with the official documentation! It has everything from basic tutorials to project examples to get you going."
+                ];
+                const randomIndex = Math.floor(Math.random() * howToStartResponses.length);
+                chatLog.innerHTML += `<p class="ai-msg">${howToStartResponses[randomIndex]}</p>`;
+            } else if (normalizedInput.includes("libraries") || normalizedInput.includes("functions")) {
+                const librariesResponses = [
+                    "E-Code offers several built-in libraries to simplify your development process! These include libraries for graphics, sound, and user input. You can easily access them through our simple syntax.",
+                    "E-Code is equipped with built-in libraries for common game development tasks like graphics, sound, and input handling. They are designed for easy access and use.",
+                    "Simplify game creation with E-Code's built-in libraries! We provide libraries for graphics, sound, and user interactions, all easily accessible.",
+                    "Explore E-Code's libraries for graphics, sound, and input! They are designed to make game development straightforward and efficient.",
+                    "E-Code's strength lies in its built-in libraries for graphics, sound, and user input, making game development more accessible and quicker."
+                ];
+                const randomIndex = Math.floor(Math.random() * librariesResponses.length);
+                chatLog.innerHTML += `<p class="ai-msg">${librariesResponses[randomIndex]}</p>`;
+            } else if (normalizedInput.includes("release date") || normalizedInput.includes("launch") || normalizedInput.includes("when is e-code release")) {
+                const releaseDateResponses = [
+                    "Iím unable to provide a specific release date for E-Code. Please stay updated through our official channels!",
+                    "Unfortunately, I don't have a release date to share at this moment. Keep an eye on our official channels for announcements!",
+                    "Release date information isn't available right now. Please follow our official channels for the latest E-Code updates.",
+                    "I can't give you a specific release date for E-Code at this time. Official channels will be the first to announce it!",
+                    "The release date for E-Code is yet to be announced.  Please monitor our official communication channels for updates."
+                ];
+                const randomIndex = Math.floor(Math.random() * releaseDateResponses.length);
+                chatLog.innerHTML += `<p class="ai-msg">${releaseDateResponses[randomIndex]}</p>`;
+            } else if (normalizedInput.includes("what can I do with e-code") || normalizedInput.includes("how can e-code help me")) {
+                const whatCanIDoResponses = [
+                    "With E-Code, you can easily build games, applications, and more! The language is designed to be user-friendly and supports rapid prototyping. You can create anything from simple 2D games to interactive applications.",
+                    "E-Code empowers you to create games and applications easily! It's perfect for rapid development and supports projects from 2D games to interactive apps.",
+                    "Unlock your creativity with E-Code to build games and applications! Its user-friendly design is great for quick prototyping and diverse projects.",
+                    "E-Code is your tool for building games and interactive applications. It focuses on ease of use and fast development cycles.",
+                    "From simple 2D games to complex interactive applications, E-Code provides the tools you need for rapid development and user-friendly creation."
+                ];
+                const randomIndex = Math.floor(Math.random() * whatCanIDoResponses.length);
+                chatLog.innerHTML += `<p class="ai-msg">${whatCanIDoResponses[randomIndex]}</p>`;
+            } else if (normalizedInput.includes("error handling") || normalizedInput.includes("debugging") || normalizedInput.includes("how to fix bugs")) {
+                const errorHandlingResponses = [
+                    "E-Code includes built-in error handling to help you debug your code. Make sure to check error messages, review your code logic, and use the debugging tools available in the documentation.",
+                    "Debugging in E-Code is made easier with built-in error handling.  Focus on error messages, logical code review, and the documentation's debugging tools.",
+                    "To debug in E-Code, utilize the built-in error handling. Error messages and documentation tools are key, alongside careful code review.",
+                    "E-Code's error handling is designed to assist in debugging.  Pay attention to error messages, rethink your logic, and consult the debugging section in our documentation.",
+                    "For debugging E-Code, rely on the built-in error handling.  Check error messages, analyze your code flow, and use the debugging resources in the documentation."
+                ];
+                const randomIndex = Math.floor(Math.random() * errorHandlingResponses.length);
+                chatLog.innerHTML += `<p class="ai-msg">${errorHandlingResponses[randomIndex]}</p>`;
+            } else if (normalizedInput.includes("tutorial") || normalizedInput.includes("learning resources") || normalizedInput.includes("documentation")) {
+                const tutorialResponses = [
+                    "You can find tutorials, code samples, and other learning resources in the official E-Code documentation. It's a great place to start for both beginners and advanced users!",
+                    "For learning E-Code, the official documentation is your best resource. It's full of tutorials, examples, and learning material for all skill levels.",
+                    "The official E-Code documentation is the go-to for learning. Find tutorials, code samples, and resources whether you're a beginner or expert.",
+                    "Looking to learn E-Code?  The official documentation offers comprehensive tutorials, code examples, and learning resources for everyone.",
+                    "Start your E-Code learning journey with the official documentation. It provides tutorials and learning materials suitable for all levels, from beginner to advanced."
+                ];
+                const randomIndex = Math.floor(Math.random() * tutorialResponses.length);
+                chatLog.innerHTML += `<p class="ai-msg">${tutorialResponses[randomIndex]}</p>`;
+            } else if (normalizedInput.includes("how do I") || normalizedInput.includes("how can I")) {
+                const howDoIResponses = [
+                    "Can you clarify what you're trying to do with E-Code? I'd be happy to guide you through it step by step!",
+                    "To help you best, could you be more specific about what you want to achieve with E-Code? I'm ready to guide you.",
+                    "I can definitely help! Just need a bit more detail about what you're trying to accomplish with E-Code.",
+                    "Tell me more about what you're aiming for in E-Code.  I'm here to provide step-by-step assistance!",
+                    "To give you the best advice, can you describe in more detail what you're trying to do with E-Code?"
+                ];
+                const randomIndex = Math.floor(Math.random() * howDoIResponses.length);
+                chatLog.innerHTML += `<p class="ai-msg">${howDoIResponses[randomIndex]}</p>`;
+            } else if (normalizedInput.includes("commands") || normalizedInput.includes("syntax") || normalizedInput.includes("structure")) {
+                const commandsResponses = [
+                    "E-Code has a simple syntax that's easy to learn. The basic structure follows a straightforward flow: define variables, use functions, and interact with the built-in libraries. Check out the 'Commands and Syntax' section in the documentation for more details.",
+                    "E-Code syntax is designed for simplicity and quick learning. It's structured around variables, functions, and library interactions.  Details are in the 'Commands and Syntax' documentation.",
+                    "The syntax of E-Code is very user-friendly. It's built around defining variables, using functions, and leveraging built-in libraries. See the 'Commands and Syntax' section for full details.",
+                    "E-Code's syntax is straightforward and learnable, based on variables, functions, and libraries.  The 'Commands and Syntax' documentation has all the specifics.",
+                    "You'll find E-Code's syntax quite simple. It's based on a clear structure of variables, functions, and library use.  The 'Commands and Syntax' area of the documentation is your best guide."
+                ];
+                const randomIndex = Math.floor(Math.random() * commandsResponses.length);
+                chatLog.innerHTML += `<p class="ai-msg">${commandsResponses[randomIndex]}</p>`;
+            } else if (normalizedInput.includes("game") || normalizedInput.includes("build a game") || normalizedInput.includes("how to make a game")) {
+                const gameResponses = [
+                    "To build a game with E-Code, you'll need to learn about game loops, handling input, and using graphics. Start with simple projects to familiarize yourself with the language and then move to more complex games. The documentation has several examples to help you get started!",
+                    "Game development in E-Code involves understanding game loops, input handling, and graphics. Begin with basic projects and gradually advance.  Our documentation has helpful examples.",
+                    "Creating games in E-Code requires learning about game loops, user input, and graphics.  Start simple, explore the documentation's examples, and build up.",
+                    "E-Code game development focuses on game loops, input, and graphics. Begin with smaller games to get comfortable, then scale up.  Check the documentation for examples!",
+                    "Developing games with E-Code means mastering game loops, input, and graphics. Start with easy projects, use documentation examples, and gradually increase complexity."
+                ];
+                const randomIndex = Math.floor(Math.random() * gameResponses.length);
+                chatLog.innerHTML += `<p class="ai-msg">${gameResponses[randomIndex]}</p>`;
+            } else if (normalizedInput.includes("how do I save data") || normalizedInput.includes("saving data")) {
+                const saveDataResponses = [
+                    "E-Code provides tools for saving data such as user progress or high scores. You can store this data locally or even in an online database. Check the 'Data Handling' section of the documentation for more details.",
+                    "Saving game data in E-Code, like progress or scores, is supported.  You can save locally or online.  See 'Data Handling' in the documentation for specifics.",
+                    "E-Code lets you save data, including game progress and scores, either locally or online.  The 'Data Handling' section of the documentation explains how.",
+                    "For saving data in E-Code, such as game progress or high scores, you have options for local or online storage.  The 'Data Handling' documentation section is key.",
+                    "Data saving in E-Code, for progress or high scores, is possible locally or online.  Refer to the 'Data Handling' part of the documentation for guidance."
+                ];
+                const randomIndex = Math.floor(Math.random() * saveDataResponses.length);
+                chatLog.innerHTML += `<p class="ai-msg">${saveDataResponses[randomIndex]}</p>`;
+            } else if (normalizedInput.includes("community") || normalizedInput.includes("forum") || normalizedInput.includes("where can I ask questions")) {
+                const communityResponses = [
+                    "Join the official E-Code community! You can ask questions, share your projects, and get feedback from other developers in our online forums. Weíre a friendly community ready to help you succeed.",
+                    "Looking for E-Code community support? Join our official forums to ask questions, share projects, and connect with fellow developers. We're a helpful community!",
+                    "For E-Code community and support, our online forums are the place to be. Ask questions, show your work, and get advice from other E-Code users. We're a welcoming group.",
+                    "Need E-Code community support? Our official forums are active and friendly!  Ask questions, get feedback, and share your projects with other developers.",
+                    "The E-Code community awaits! Join our official forums to ask questions, share projects, and receive support from fellow E-Code enthusiasts. We're here to help you."
+                ];
+                const randomIndex = Math.floor(Math.random() * communityResponses.length);
+                chatLog.innerHTML += `<p class="ai-msg">${communityResponses[randomIndex]}</p>`;
+            } else if (normalizedInput.includes("feedback") || normalizedInput.includes("suggestions") || normalizedInput.includes("how to contribute")) {
+                const feedbackResponses = [
+                    "We welcome your feedback and suggestions! If you want to contribute to E-Code, check out our open-source repository and start collaborating with us.",
+                    "Your feedback is valuable! To contribute to E-Code, explore our open-source repository and join the collaboration.",
+                    "We appreciate feedback and suggestions for E-Code!  If you're interested in contributing, our open-source repository is the place to start collaborating.",
+                    "Want to give feedback or suggestions for E-Code? We're all ears!  For contributions, our open-source repository is open for collaboration.",
+                    "E-Code thrives on feedback and suggestions!  If you'd like to contribute, check out our open-source repository and become a collaborator."
+                ];
+                const randomIndex = Math.floor(Math.random() * feedbackResponses.length);
+                chatLog.innerHTML += `<p class="ai-msg">${feedbackResponses[randomIndex]}</p>`;
+            } else if (normalizedInput.includes("version") || normalizedInput.includes("updates") || normalizedInput.includes("changelog")) {
+                const versionResponses = [
+                    "You can find information about the latest updates and changes in the changelog section of the official documentation.",
+                    "For the latest on E-Code updates and changes, the changelog in the official documentation is your source.",
+                    "Stay informed on E-Code versions and updates through the changelog in our official documentation.",
+                    "Looking for E-Code version details and updates? Check the changelog section of the official documentation.",
+                    "The changelog in the official E-Code documentation is where you'll find all the info on the latest versions and updates."
+                ];
+                const randomIndex = Math.floor(Math.random() * versionResponses.length);
+                chatLog.innerHTML += `<p class="ai-msg">${versionResponses[randomIndex]}</p>`;
+            } else if (normalizedInput.includes("contact") || normalizedInput.includes("support") || normalizedInput.includes("how can I get help")) {
+                const contactResponses = [
+                    "If you need further assistance, you can contact our support team directly through the contact form available on the website. We are here to help!",
+                    "For direct support, please use the contact form on our website to reach our support team. We're ready to assist you!",
+                    "Need more help?  Reach out to our support team via the contact form on our website. We're here to help you further.",
+                    "For additional support, please use the contact form on the website to get in touch with our support team. We're dedicated to helping you.",
+                    "If you require more assistance, our support team is available through the contact form on the website. We're here to provide support!"
+                ];
+                const randomIndex = Math.floor(Math.random() * contactResponses.length);
+                chatLog.innerHTML += `<p class="ai-msg">${contactResponses[randomIndex]}</p>`;
+            } else if (normalizedInput.includes("what do you do") || normalizedInput.includes("what are you") || normalizedInput.includes("who are you")) {
+                const whatAreYouResponses = [
+                    "I'm your E-Code Assistant, here to help you with anything related to the E-Code programming language! Feel free to ask me any questions about it.",
+                    "I am the E-Code AI Supporter, designed to assist you with all things E-Code! Ask me anything about it.",
+                    "Consider me your E-Code guide! I'm here to answer your questions and help you navigate the world of E-Code.",
+                    "I'm the E-Code Assistant, at your service for any questions you have about E-Code.  How can I assist you today?",
+                    "I'm here to support your E-Code journey! Ask me anything related to the E-Code programming language and I'll do my best to assist."
+                ];
+                const randomIndex = Math.floor(Math.random() * whatAreYouResponses.length);
+                chatLog.innerHTML += `<p class="ai-msg">${whatAreYouResponses[randomIndex]}</p>`;
+            }
+            else if (userInput.includes('example') || userInput.includes('example code') || userInput.includes('provide an example') || userInput.includes('give me a sample') || userInput.includes('show me how')) {
+                let codeExample = `
+Initialize Game;
+Import 'Player' and 'Team' objects;
+Import 'Scoreboard' and 'GameTime' components;
+Set 'Player' at starting position (x: 10, y: 5);
+Set 'Opponent' at starting position (x: 50, y: 5);
+Set 'Ball' at (x: 30, y: 5);
+
+When user inputs LeftArrow then the object 'Player' moves left by 5 units;
+When user inputs RightArrow then the object 'Player' moves right by 5 units;
+When user inputs UpArrow then the object 'Player' moves up by 5 units;
+When user inputs DownArrow then the object 'Player' moves down by 5 units;
+
+If object 'Ball' passes the 'GoalLine' then the score for 'TeamHome' +1 and play sound effect 'GoalSound';
+If object 'Ball' hits 'Goalkeeper' then the object 'Ball' is blocked;
+
+When the game ends then display 'Game Over' message;
+When 'TeamHome' scores then run Animation Clip (CelebrateGoal) and update 'Scoreboard' with new score;
+When user inputs 'Pause' then the game is paused;
+`;
+                chatLog.innerHTML += `<p class="ai-msg">E-Code AI Supporter: Here's an example of E-Code programming:</p><pre>${codeExample}</pre>`;
+                chatLog.scrollTop = chatLog.scrollHeight;
+            }
+
+
+            // «·—œ ⁄·Ï «” ›”«—«  ÕÊ· «·œÊ«·
+            else if (normalizedInput.includes("if") || normalizedInput.includes("when") || normalizedInput.includes("and") || normalizedInput.includes("then")) {
+                const functionResponses = [
+                    "Here are some of the basic functions and keywords in E-Code:\n\n - 'if' - Conditional statement.\n - 'when' - Trigger-based condition.\n - 'and' - Logical operator.\n - 'then' - Follow-up action after condition.\n - 'end' - Marks the end of a block.\n You can use these to create simple and powerful game logic in E-Code.",
+                    "E-Code uses keywords like 'if', 'when', 'and', 'then', 'end' for game logic.  'if' for conditions, 'when' for triggers, 'and' for combining conditions, 'then' for actions, and 'end' to close blocks.",
+                    "Key E-Code functions include 'if' (conditional), 'when' (trigger-based), 'and' (logical), 'then' (action), and 'end' (block terminator). These are fundamental for game logic.",
+                    "For game logic in E-Code, use keywords like 'if' for conditional checks, 'when' for event triggers, 'and' for logical AND, 'then' for actions, and 'end' to close code blocks.",
+                    "E-Code game logic is built with keywords like 'if' (condition), 'when' (trigger), 'and' (logical AND), 'then' (action), and 'end' (block end). These are essential for scripting game events."
+                ];
+                const randomIndex = Math.floor(Math.random() * functionResponses.length);
+                chatLog.innerHTML += `<p class="ai-msg">${functionResponses[randomIndex]}</p>`;
+            }
+
+
+            // «·—œ «·«› —«÷Ì ›Ì Õ«· ﬂ«‰  «·≈Ã«»… €Ì— „ÊÃÊœ… „⁄  ‰ÊÌ⁄ «·—œÊœ
+            else {
+                const defaultResponses = [
+                    "I'm sorry, I'm specifically designed to help with E-Code. Let me know if you need assistance with anything related to E-Code!",
+                    "I apologize, but my expertise is limited to E-Code.  If you have E-Code questions, I'm here to help!",
+                    "I'm focused on E-Code assistance.  If your question is about E-Code, please ask!",
+                    "My purpose is to help with E-Code.  If you need E-Code support, I'm ready!",
+                    "I can only assist with E-Code related inquiries.  If you have an E-Code question, feel free to ask!"
+                ];
+                const randomIndex = Math.floor(Math.random() * defaultResponses.length);
+                chatLog.innerHTML += `<p class="ai-msg">${defaultResponses[randomIndex]}</p>`;
+            }
+
+            chatLog.scrollTop = chatLog.scrollHeight;
+            document.getElementById('user-input').value = '';
+        }
+
+
+        function getAIMessage(userInput) {
+            const input = userInput.toLowerCase();
+
+            // General greetings
+            if (input.includes('hello') || input.includes('hi') || input.includes('hey')) {
+                return "Hello! How can I assist you with E-Code today?";
+            }
+            if (input.includes('how are you') || input.includes('how is it going')) {
+                return "I'm doing great, thanks for asking! How can I help you with E-Code today?";
+            }
+            if (input.includes('good morning') || input.includes('good evening')) {
+                return "Good day to you! How can I assist you today?";
+            }
+
+            // Responding to random questions
+            if (input.includes('what is e-code')) {
+                return "E-Code is a new programming language designed specifically for game and app development, focusing on simplicity and ease of use.";
+            }
+            if (input.includes('how can I learn e-code')) {
+                return "You can learn E-Code by visiting the official documentation and tutorials available online or asking me any questions about it!";
+            }
+            if (input.includes('is e-code open source')) {
+                return "Yes, E-Code is open source, which means you can use it freely and even contribute to its development!";
+            }
+
+            // Questions about release or updates
+            if (input.includes('when will e-code be released')) {
+                return "Sorry, I can't provide the release date at the moment. But I'm happy to assist you with any other questions regarding E-Code!";
+            }
+
+            // Off-topic questions (Outside the scope of E-Code)
+            if (input.includes('can you help me with python') || input.includes('how to code in python')) {
+                return "Sorry, I'm specifically designed for E-Code. I can help you with anything related to E-Code!";
+            }
+
+            // Default fallback for unknown questions
+            return "Sorry, I can only assist with questions related to E-Code. Please ask anything related to E-Code, and I'll be happy to help!";
+        }
+    </script>
+
+</body>
+</html>

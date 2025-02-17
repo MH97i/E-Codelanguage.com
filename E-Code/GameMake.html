@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Your Game - E-CODE</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Create Your Game with E-CODE</h1>
+        <p>Use E-CODE to create a simple game by writing some code below!</p>
+    </header>
+
+    <section id="game-creation">
+        <h2>Write Your Game Code</h2>
+        <textarea id="code-editor" rows="10" cols="60">
+Initialize Game;
+Import "Player" and "Ball" objects;
+Set "Player" at (x: 10, y: 5);
+Set "Ball" at (x: 30, y: 5);
+
+When user inputs LeftArrow then "Player" moves left;
+When user inputs RightArrow then "Player" moves right;
+
+If "Ball" passes "GoalLine" then show "Goal!";
+        </textarea>
+        <button onclick="runGame()">Run Game</button>
+    </section>
+
+    <section id="game-display">
+        <h2>Your Game Output</h2>
+        <div id="game-container">
+            <!-- This is where the game will be displayed -->
+            <p>Game output will appear here once the code runs.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 E-CODE. All rights reserved.</p>
+    </footer>
+
+    <script src="game.js"></script>
+</body>
+</html>
